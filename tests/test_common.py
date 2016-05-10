@@ -1,7 +1,7 @@
 __author__ = 'anthony'
 
 import websocket
-import os, sys
+import os, sys, time
 from tornado import template
 from tornado import testing, httpserver, gen, websocket, httpclient
 import json
@@ -37,6 +37,10 @@ class BasicTestCase(testing.AsyncHTTPTestCase, testing.LogTrapTestCase):
         if kwargs:
             url = '%s?%s' % (url, query_string)
         return url
+
+    def make_relative_url(self, path, **kwargs):
+        query_string =  urlencode(OrderedDict(kwargs))
+        return '%s?%s' % (path, query_string)
 
     def _mk_ws_connection(self, path, **kwargs):
         return websocket.websocket_connect(self.make_url(path, protocol='ws', **kwargs))

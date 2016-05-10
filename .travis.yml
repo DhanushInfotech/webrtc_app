@@ -1,11 +1,11 @@
 language: python
 python:
   - "2.7"
-  - "pypy"
+#  - "pypy"
 # command to install dependencies
 install:
   - pip install -r pip-requirements.txt
 # command to run tests
 script:
   - coverage run --source='.' -m tornado.test.runtests discover tests
-  - coverage report -m -i --omit=daemon.py,*.html
+  - coverage report -m -i --omit=*.html
